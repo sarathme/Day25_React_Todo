@@ -9,6 +9,8 @@ CSS CUSTOM VARIABLES
   --clr-primary-400: hsl(73, 100%, 60%);
   --clr-secondary-400: hsl(38, 100%, 59%);
   --clr-accent-100: #f6f5f5;
+  --clr-green-700: #1a3636;
+  --clr-green-400: hsl(180, 64%, 19%);
 }
 
 ::selection {
@@ -24,6 +26,8 @@ CSS RESET
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* Prevent font size inflation */
@@ -55,11 +59,25 @@ ol[role="list"] {
 
 /* Set core body defaults */
 body {
+  font-size: 0.8rem;
   min-height: 100vh;
   line-height: 1.5;
   background: var(--clr-primary-100);
   font-family: "Cutive Mono", monospace;
   color: #365e32;
+  margin: 0;
+}
+
+@media (min-width: 600px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 900px) {
+  body {
+    font-size: 1.2rem;
+  }
 }
 
 /* Set shorter line heights on headings and interactive elements */
@@ -114,7 +132,7 @@ textarea:not([rows]) {
 }
 
 .container {
-  width: min(100%, 1200px);
+  width: min(100%, 1400px);
   margin: 0 auto;
   padding: 0.05em 1em 0 2em;
 }
@@ -133,19 +151,15 @@ textarea:not([rows]) {
 
 .form {
   display: flex;
-  gap: 1rem;
-  min-height: 20vh;
-  flex-wrap: wrap;
-  /* align-items: center; */
+  gap: 1.5rem;
+  min-height: auto;
+  flex-direction: column;
 }
 
 .input-group {
   flex: 1;
-  flex-basis: 100%;
   font-size: 1.5rem;
   font-weight: 700;
-  position: relative;
-  isolation: isolate;
 }
 
 .input-group > *:not(:last-child) {
@@ -153,7 +167,6 @@ textarea:not([rows]) {
 }
 
 .input-field {
-  /* overflow: hidden; */
   min-height: 4rem;
   max-height: 10rem;
   border-radius: 0.4em;
@@ -171,43 +184,74 @@ textarea:not([rows]) {
 
 .input-group > * {
   display: block;
-  width: 90%;
+  width: 80%;
+  /* width: 90%; */
+}
+
+.form button {
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.8em 2em;
+  align-self: flex-start;
+  border-radius: 50vh;
+  border: none;
+  outline: none;
+  font-weight: 900;
+  background: var(--clr-secondary-400);
+  transition: transform 500ms;
+  color: var(--clr-accent-100);
+}
+.form button:focus,
+.form button:hover {
+  transform: scale(1.05);
+  outline: 5px solid var(--clr-secondary-400);
+  outline-offset: 0.2rem;
 }
 
 .todo-list {
   display: flex;
+  list-style: none;
   gap: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.todo > h2 {
+  text-transform: capitalize;
 }
 
 .todo {
-  flex: 1 1 30rem;
-  background-color: #fff8db;
-  /* color: var(--clr-accent-100); */
-  padding: 3em 2em 3em 1.5em;
-  border-radius: 0.6em;
   position: relative;
+  background: var(--clr-accent-100);
+  color: var(--clr-green-700);
+  border-radius: 0.6em;
+  box-shadow: -2px 1px 8px 1px var(--clr-green-700);
+  display: grid;
+  grid-template-rows: 6rem 1fr;
+  gap: 1rem;
+  padding: 5em 0.6em 2em 0.6em;
 }
 
-.todo h2 {
-  font-size: 2rem;
-  font-weight: 900;
+.mark-completed {
+  opacity: 0.6;
+  transition: opacity 400ms;
 }
 
-.todo p {
-  font-size: 1.05rem;
-  font-weight: 700;
+.mark-completed:hover {
+  opacity: 0.85;
+}
+
+.mark-completed:focus-within {
+  opacity: 0.85;
 }
 
 .todo-status {
-  display: inline-block;
-  padding: 0.4em 0.8em;
-  border-radius: 50vh;
   position: absolute;
   top: 1rem;
   left: 1rem;
-  font-weight: 900;
+  padding: 0.5em 0.6em;
   color: var(--clr-accent-100);
+  font-weight: 700;
+  border-radius: 50vh;
 }
 
 .completed {
@@ -215,37 +259,78 @@ textarea:not([rows]) {
 }
 
 .pending {
-  background: yellow;
+  background: red;
 }
 
 .cta {
+  display: flex;
+  gap: 1rem;
   position: absolute;
-  top: 1rem;
   right: 1rem;
+  top: 1.5rem;
 }
 
-.btn {
+.cta > button {
+  background-color: transparent;
+  color: var(--clr-secondary-400);
   border: none;
-  padding: 0.6em;
-  /* background-color: transparent; */
-  border-radius: 0.6em;
-  font-weight: 900;
+  outline: none;
 }
 
-.btn:not(:last-child) {
-  margin-right: 1rem;
+.cta span {
+  cursor: pointer;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
-.btn:hover {
-  background-color: var(--clr-primary-400);
+.cta > button:hover,
+.cta > button:focus {
+  transform: scale(1.2);
+  color: var(--clr-green-700);
+}
+
+@media (min-width: 340px) {
+  .todo-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.6em;
+  }
+
+  .todo {
+    /* flex: 1; */
+    flex-basis: 22rem;
+
+    /* outline: 2px solid green; */
+  }
+}
+
+@media (min-width: 768px) {
+  .todo-list {
+    padding: 1em;
+    justify-content: flex-start;
+  }
+
+  .todo {
+    flex-basis: 20rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .todo-list {
+    padding: 2em;
+  }
+  .todo {
+    flex-basis: 23.6rem;
+    justify-content: flex-start;
+  }
 }
 
 .stats {
   font-size: 1.2rem;
   text-align: center;
-  font-weight: 900;
-  width: 100vw;
-  padding: 1em;
-  background-color: var(--clr-secondary-400);
-  margin-top: 1rem;
+  padding: 2em;
+  font-weight: 700;
+  background-color: var(--clr-green-700);
+  color: var(--clr-accent-100);
 }

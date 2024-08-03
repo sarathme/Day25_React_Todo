@@ -1,21 +1,35 @@
-function Todo({ todo }) {
+function Todo({ todo, onComplete, onDelete }) {
   return (
-    <div className="todo">
-      <h2 className="todo-title">Make Tea</h2>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, suscipit.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius,
-        repellat. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Temporibus rerum quisquam explicabo non illo itaque corrupti maiores
-        tenetur ad? Beatae.
-      </p>
+    <li className={`todo ${todo.completed ? "mark-completed" : ""}`}>
+      <h2 className="todo-title">{todo.title}</h2>
+
+      {/* <input type="text" readOnly value={todo.title} /> */}
+      <p>{todo.description}</p>
 
       <div className="cta">
-        <button className="btn">Edit</button>
-        <button className="btn">Delete</button>
+        <button>
+          <span className="material-symbols-outlined">edit</span>
+        </button>
+        <button>
+          <span
+            className="material-symbols-outlined"
+            onClick={() => onDelete(todo)}>
+            delete
+          </span>
+        </button>
+        <button>
+          <span
+            className="material-symbols-outlined"
+            onClick={() => onComplete(todo)}>
+            {todo.completed ? "unpublished" : "check_circle "}
+          </span>
+        </button>
       </div>
-      <div className="todo-status completed">Completed</div>
-    </div>
+      <div
+        className={`todo-status ${todo.completed ? "completed" : "pending"}`}>
+        {todo.completed ? "Completed" : "Pending"}
+      </div>
+    </li>
   );
 }
 

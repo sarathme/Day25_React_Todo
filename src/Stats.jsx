@@ -1,8 +1,16 @@
-function Stats() {
+function Stats({ todos }) {
+  const completedTodos = todos.reduce((acc, todo) => {
+    if (todo.isCompleted) return acc + 1;
+    return acc;
+  }, 0);
+
   return (
-    <div className="stats">
-      <p>You have Completed 10 TODOS and your pending todos: 5</p>
-    </div>
+    <footer className="stats">
+      <p>
+        You have Completed {completedTodos} TODOS and your pending todos:{" "}
+        {todos.length - completedTodos}
+      </p>
+    </footer>
   );
 }
 
