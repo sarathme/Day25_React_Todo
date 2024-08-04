@@ -1,21 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function Form({ onAdd }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  useEffect(() => {}, [title, description]);
-
   function handleSubmit(e) {
     e.preventDefault();
     const todo = { title, description, completed: false, id: Date.now() };
-    console.log(todo);
     onAdd(todo);
   }
 
   function handleChange(e) {
     if (e.target.id === "title") {
-      setTitle(e.target.value);
+      if (e.target.value.length <= 50) {
+        setTitle(e.target.value);
+      }
+    } else {
+      if (e.target.value.length <= 150) {
+        setDescription(e.target.value);
+      }
     }
   }
   return (
@@ -26,11 +29,9 @@ function Form({ onAdd }) {
           type="text"
           id="title"
           className="input-field"
-          placeholder="Enter a TODO title"
+          placeholder="Enter a TODO title (50 characters)"
           value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
+          onChange={handleChange}
           required
         />
       </div>
@@ -41,11 +42,9 @@ function Form({ onAdd }) {
           type="text"
           id="description"
           className="input-field"
-          placeholder="What's the TODO. Explain Here."
+          placeholder="What's the TODO. Explain Here. (150 characters)"
           value={description}
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
+          onChange={handleChange}
           required
         />
       </div>

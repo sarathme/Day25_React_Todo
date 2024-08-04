@@ -1,6 +1,6 @@
 import Todo from "./Todo";
 
-function TodoList({ todos, onComplete, onDelete }) {
+function TodoList({ todos, onUpdate, onDelete }) {
   return (
     <ul className="todo-list">
       {todos.length === 0 && <h3>No Todos Available</h3>}
@@ -8,7 +8,7 @@ function TodoList({ todos, onComplete, onDelete }) {
         <Todo
           key={todo.id}
           todo={todo}
-          onComplete={onComplete}
+          onUpdate={onUpdate}
           onDelete={onDelete}
         />
       ))}

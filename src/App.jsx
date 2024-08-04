@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "./Form.jsx";
 import Header from "./Header.jsx";
 import Stats from "./Stats.jsx";
-import Todo from "./Todo.jsx";
 import TodoList from "./TodoList.jsx";
 
 const todosTemp = [
@@ -43,26 +42,43 @@ const todosTemp = [
 ];
 
 function App() {
-  const [todos, setTodos] = useState(todosTemp);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const todosStorage = localStorage.getItem("todos");
+
+    if (!todosStorage) localStorage.setItem("todos", JSON.stringify(todos));
+
+    setTodos(JSON.parse(localStorage.getItem("todos")));
+  }, []);
 
   function handleAddTodo(todo) {
-    setTodos((todos) => [...todos, todo]);
+    setTodos((todos) => {
+      const newTodos = [...todos, todo];
+      localStorage.setItem("todos", JSON.stringify(newTodos));
+      return newTodos;
+    });
   }
-
-  function handleOnComplete(todoCompleted) {
-    setTodos((todos) =>
-      todos.map((todo) => {
-        if (todo.id === todoCompleted.id) {
-          return { ...todo, completed: !todo.completed };
+  function handleOnUpdate(todoUpdated) {
+    setTodos((todos) => {
+      const updatedTodo = todos.map((todo) => {
+        if (todo.id === todoUpdated.id) {
+          return todoUpdated;
         }
 
         return todo;
-      })
-    );
+      });
+      localStorage.setItem("todos", JSON.stringify(updatedTodo));
+      return updatedTodo;
+    });
   }
 
   function handleOnDelete(todoDelete) {
-    setTodos((todos) => todos.filter((todo) => todo.id !== todoDelete.id));
+    setTodos((todos) => {
+      const updatedTodo = todos.filter((todo) => todo.id !== todoDelete.id);
+      localStorage.setItem("todos", JSON.stringify(updatedTodo));
+      return updatedTodo;
+    });
   }
   return (
     <>
@@ -71,7 +87,7 @@ function App() {
         <Form onAdd={handleAddTodo} />
         <TodoList
           todos={todos}
-          onComplete={handleOnComplete}
+          onUpdate={handleOnUpdate}
           onDelete={handleOnDelete}
         />
       </div>
