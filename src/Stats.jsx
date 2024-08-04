@@ -10,8 +10,8 @@ function Stats({ todos }) {
     <footer className="stats">
       {todos.length > 0 && pendingTodos > 0 && (
         <p>
-          You have Completed {completedTodos} TODOS and your pending todos:
-          {pendingTodos}
+          You have Total TODOS:{todos.length} Completed:{completedTodos} TODOS
+          Pending:{pendingTodos}
         </p>
       )}
       {todos.length > 0 && pendingTodos === 0 && (

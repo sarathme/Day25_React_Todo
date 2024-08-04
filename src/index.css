@@ -215,6 +215,27 @@ textarea:not([rows]) {
   outline-offset: 0.2rem;
 }
 
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em;
+}
+
+.filter select {
+  outline: none;
+  padding: 0.6em 1em;
+  background: var(--clr-green-400);
+  color: var(--clr-accent-100);
+  border-radius: 0.6em;
+  font-weight: 700;
+}
+
+.filter select:focus {
+  outline: 4px solid var(--clr-green-400);
+  outline-offset: 0.2rem;
+}
+
 .todo-list {
   display: flex;
   list-style: none;
@@ -236,6 +257,7 @@ textarea:not([rows]) {
 
 .todo {
   /* min-width: 40rem; */
+  min-height: 32rem;
   position: relative;
   background: var(--clr-accent-100);
   color: var(--clr-green-700);
@@ -247,8 +269,9 @@ textarea:not([rows]) {
 
 .todo-details {
   /* width: 100px; */
+
   display: grid;
-  grid-template-rows: 5.5rem 1fr;
+  grid-template-rows: 10rem 1fr;
   gap: 1rem;
 }
 

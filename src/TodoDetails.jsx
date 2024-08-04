@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function TodoDetails({ todo, setIsEditMode, onDelete, onUpdate }) {
+function TodoDetails({ todo, setIsEditMode, onUpdate }) {
   const completedBtn = useRef();
   return (
     <>
@@ -14,7 +14,7 @@ function TodoDetails({ todo, setIsEditMode, onDelete, onUpdate }) {
         </button>
         <button
           onClick={() => {
-            onDelete(todo);
+            onUpdate(todo, true);
           }}>
           <span className="material-symbols-outlined">delete</span>
         </button>

@@ -26,7 +26,7 @@ function TodoEditForm({ todo, setIsEditMode, onUpdate }) {
       description: editDescription,
       completed: false,
     };
-    onUpdate(EditedTodo, true);
+    onUpdate(EditedTodo);
     setIsEditMode(false);
   }
   return (
