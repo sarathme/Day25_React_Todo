@@ -8,6 +8,8 @@ function Form({ onAdd }) {
     e.preventDefault();
     const todo = { title, description, completed: false, id: Date.now() };
     onAdd(todo);
+    setTitle("");
+    setDescription("");
   }
 
   function handleChange(e) {

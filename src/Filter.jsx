@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Filter({ todos, setTodosFiltered }) {
   const [selctedFilter, setSelectedFilter] = useState("all");
-  console.log(todos);
+
+  useEffect(() => {
+    setSelectedFilter("all");
+  }, [todos]);
+
   function onFilterHandler(e) {
-    console.log(e.target.value);
     setSelectedFilter(e.target.value);
     if (e.target.value === "all") setTodosFiltered(todos);
     if (e.target.value === "completed") {

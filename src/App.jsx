@@ -60,7 +60,7 @@ function App() {
 
   function handleAddTodo(todo) {
     setTodos((todos) => {
-      const newTodos = [...todos, todo];
+      const newTodos = [todo, ...todos];
       localStorage.setItem("todos", JSON.stringify(newTodos));
       return newTodos;
     });

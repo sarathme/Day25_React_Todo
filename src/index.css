@@ -279,7 +279,7 @@ textarea:not([rows]) {
   text-transform: capitalize;
 }
 .todo-details p {
-  /* width: min-content; */
+  /* width: 80%; */
   word-break: break-all;
   hyphens: auto;
 }
