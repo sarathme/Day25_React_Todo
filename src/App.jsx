@@ -5,45 +5,8 @@ import Stats from "./Stats.jsx";
 import TodoList from "./TodoList.jsx";
 import Filter from "./Filter.jsx";
 
-const todosTemp = [
-  {
-    id: 1,
-    title: "Do something nice for someone you care about",
-    completed: false,
-    description: "Lorem ipsum odor amet, consectetuer adipiscing elit.",
-  },
-  {
-    id: 2,
-    title: "Memorize a poem",
-    completed: true,
-    description:
-      "Lorem ipsum odor amet, consectetuer adipiscing elit. Diam congue nulla turpis enim et sodales placerat viverra. Accumsan vitae viverra suscipit est ornare.",
-  },
-  {
-    id: 3,
-    title: "Watch a classic movie",
-    completed: true,
-    description:
-      "Lorem ipsum odor amet, consectetuer adipiscing elit. Diam congue nulla turpis enim et sodales placerat viverra. Accumsan vitae viverra suscipit est ornare.",
-  },
-  {
-    id: 4,
-    title: "Watch a documentary",
-    completed: false,
-    description:
-      "Lorem ipsum odor amet, consectetuer adipiscing elit. Diam congue nulla turpis enim et sodales placerat viverra. Accumsan vitae viverra suscipit est ornare.",
-  },
-  {
-    id: 5,
-    title: "Watch a documentary",
-    completed: false,
-    description:
-      "Lorem ipsum odor amet, consectetuer adipiscing elit. Diam congue nulla turpis enim et sodales placerat viverra. Accumsan vitae viverra suscipit est ornare.",
-  },
-];
-
 function App() {
-  const [todos, setTodos] = useState(todosTemp);
+  const [todos, setTodos] = useState([]);
   const [todosFiltered, setTodosFiltered] = useState(todos);
 
   useEffect(() => {
