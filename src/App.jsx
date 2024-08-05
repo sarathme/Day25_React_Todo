@@ -3,6 +3,7 @@ import Form from "./Form.jsx";
 import Header from "./Header.jsx";
 import Stats from "./Stats.jsx";
 import TodoList from "./TodoList.jsx";
+import Todo from "./Todo.jsx";
 import Filter from "./Filter.jsx";
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
     setTodosFiltered(todos);
   }, [todos]);
 
+  // Handler function to Add new TODOs
+
   function handleAddTodo(todo) {
     setTodos((todos) => {
       const newTodos = [todo, ...todos];
@@ -28,6 +31,9 @@ function App() {
       return newTodos;
     });
   }
+
+  // Handler function to Update TODO or Delete TODO
+
   function handleOnUpdate(todoUpdated, del = false) {
     setTodos((todos) => {
       const updatedTodo = !del
@@ -50,7 +56,12 @@ function App() {
         <Header />
         <Form onAdd={handleAddTodo} />
         <Filter todos={todos} setTodosFiltered={setTodosFiltered} />
-        <TodoList todos={todosFiltered} onUpdate={handleOnUpdate} />
+        <TodoList>
+          {todosFiltered.length === 0 && <h3>No Todos Available</h3>}
+          {todosFiltered.map((todo) => (
+            <Todo key={todo.id} todo={todo} onUpdate={handleOnUpdate} />
+          ))}
+        </TodoList>
       </div>
       <Stats todos={todos} />
     </>

@@ -4,6 +4,8 @@ function Form({ onAdd }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  // Handler function to pass the new TODO data to App Component to add the created TODO when submitted.
+
   function handleSubmit(e) {
     e.preventDefault();
     const todo = { title, description, completed: false, id: Date.now() };
@@ -11,6 +13,8 @@ function Form({ onAdd }) {
     setTitle("");
     setDescription("");
   }
+
+  // Common function to handle change event in the form input and textarea element and to limit characters for each input. (Implement Controlled Elements).
 
   function handleChange(e) {
     if (e.target.id === "title") {

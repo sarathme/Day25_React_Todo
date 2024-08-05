@@ -4,9 +4,13 @@ function TodoEditForm({ todo, setIsEditMode, onUpdate }) {
   const titleInput = useRef();
   const [editTitle, setEditTitle] = useState(todo.title);
   const [editDescription, setEditDescription] = useState(todo.description);
+
   useEffect(() => {
     titleInput.current.focus();
   }, []);
+
+  // Common function to handle change event in the form input and textarea element and to limit characters for each inputs. (Implement Controlled Elements).
+
   function handleChange(e) {
     if (e.target.id === "edit-title") {
       if (e.target.value.length <= 50) {
@@ -18,6 +22,8 @@ function TodoEditForm({ todo, setIsEditMode, onUpdate }) {
       }
     }
   }
+
+  // Handler function to save the edited TODO data by passing the edited TODO to App Component through onUpdate prop.
 
   function handleEdit() {
     const EditedTodo = {

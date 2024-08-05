@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 
 function Filter({ todos, setTodosFiltered }) {
-  const [selctedFilter, setSelectedFilter] = useState("all");
+  const [selectedFilter, setSelectedFilter] = useState("all");
 
   useEffect(() => {
     setSelectedFilter("all");
   }, [todos]);
+
+  // Handler function to pass the filtered TODOs to App Component to render on the screen.
 
   function onFilterHandler(e) {
     setSelectedFilter(e.target.value);
@@ -23,7 +25,7 @@ function Filter({ todos, setTodosFiltered }) {
       <select
         name="filter"
         id="filter"
-        value={selctedFilter}
+        value={selectedFilter}
         onChange={onFilterHandler}>
         <option value="all">All TODOs</option>
         <option value="completed">Completed TODOs</option>
